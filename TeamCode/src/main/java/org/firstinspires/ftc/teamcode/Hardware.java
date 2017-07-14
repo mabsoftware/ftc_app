@@ -35,8 +35,16 @@ public class Hardware {
         this.backLeft = this.hwMap.dcMotor.get("back_left");
         this.backRight = this.hwMap.dcMotor.get("back_right");
 
+        this.frontLeft.setDirection(DcMotor.Direction.FORWARD);
+        this.backLeft.setDirection(DcMotor.Direction.FORWARD);
         this.frontRight.setDirection(DcMotor.Direction.REVERSE);
         this.backRight.setDirection(DcMotor.Direction.REVERSE);
+
+        this.frontRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.frontLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.backRight.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.backLeft.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
 
         if (usingEncoders) {
             this.frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
