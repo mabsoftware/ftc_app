@@ -79,7 +79,7 @@ public class MecanumDrive implements Drive {
      * Sets the speed of encoder-based driving
      * @param speed
      */
-    public void setDriveSpeed(int speed) {
+    public void setEncoderDriveSpeed(int speed) {
         this.speed = speed;
     }
 
