@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class MecanumDrive implements Drive {
     private Hardware robot;
     private LinearOpMode opMode;
+    private SensorPackage sensors;
     private double speed;
 
     /**
@@ -20,9 +21,10 @@ public class MecanumDrive implements Drive {
      * @param robot Robot hardware wrapper
      * @param opMode Opmode
      */
-    public MecanumDrive(Hardware robot, LinearOpMode opMode) {
+    public MecanumDrive(Hardware robot, LinearOpMode opMode, SensorPackage sensors) {
         this.robot = robot;
         this.opMode = opMode;
+        this.sensors = sensors;
         this.speed = 0;
     }
 
@@ -40,7 +42,13 @@ public class MecanumDrive implements Drive {
      * @param degrees
      */
     public void turn(int degrees) {
-
+        int target = (this.sensors.getHeading() + degrees) % 360;
+        if (degrees == 0) return;
+        else if (degrees < 0) this.setSpeeds(-this.speed, this.speed);
+        else this.setSpeeds(this.speed, -this.speed);
+        while (this.sensors.getHeading() != target) {
+            this.opMode.idle();
+        }
     }
 
     /**
@@ -58,7 +66,7 @@ public class MecanumDrive implements Drive {
      * @param left
      * @param right
      */
-    public void setSpeeds(int left, int right) {
+    public void setSpeeds(double left, double right) {
         robot.frontLeft.setPower(left);
         robot.backLeft.setPower(left);
         robot.frontRight.setPower(right);
@@ -71,7 +79,7 @@ public class MecanumDrive implements Drive {
      * sides to the same speed
      * @param speed
      */
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.setSpeeds(speed, speed);
     }
 

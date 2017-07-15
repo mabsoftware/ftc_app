@@ -59,4 +59,8 @@ public class Hardware {
             this.backLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
     }
+
+    public HardwareMap getHwMap() {
+        return hwMap;
+    }
 }

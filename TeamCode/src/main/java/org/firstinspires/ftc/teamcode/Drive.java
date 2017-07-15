@@ -10,6 +10,6 @@ package org.firstinspires.ftc.teamcode;
 public interface Drive {
     public void drive(int left, int right);
     public void turn(int degrees);
-    public void setSpeeds(int left, int right);
-    public void setSpeed(int speed);
+    public void setSpeeds(double left, double right);
+    public void setSpeed(double speed);
 }
